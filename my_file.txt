@@ -1,0 +1,18 @@
+#_inlude <stdio.h> // This is a header file
+#include<stdio.h> // This is a header file
+int main()
+{
+    int a2;//comncmdmefefdf
+    /*
+    jfiejfiejf
+    feifaiejfidjsffjiejijidjfe
+    */
+    a2 =10;//efefefe
+    /*feifaiejfidjsffjiejijidjfee
+    efefe*/
+    float k08;
+    k08 <<= 1;
+    a2+=23;
+    printf("The value of a is %d",a);
+    return 0;
+}
