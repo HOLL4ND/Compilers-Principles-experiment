@@ -54,13 +54,13 @@ def scanStr(str):
         if ch == ' ' or ch == '\t':
             if lastMode == "mark":
                 nowCharBuffer = ""
-            #     continue
             result = checkToken(checkMode,nowCharBuffer)
             if result != -1:
                 tempResult.append(result)
             elif len(nowCharBuffer)!=0:
                 tempResult.append((nowCharBuffer,81))
             nowCharBuffer = ""
+            checkMode = "space"
 
         elif ch.isalpha():
             if lastMode == "mark":
@@ -71,12 +71,9 @@ def scanStr(str):
         elif ch.isnumeric():
             if lastMode == "mark":
                 nowCharBuffer = ""
-            if checkMode != "alpha":
+            if lastMode != "alpha":
                 checkMode="number"
-                nowCharBuffer = nowCharBuffer + ch
-          
-            elif checkMode == "alpha":
-                nowCharBuffer = nowCharBuffer + ch
+            nowCharBuffer = nowCharBuffer + ch
         elif ch:
                 checkMode="mark"
 
@@ -108,7 +105,6 @@ def scanStr(str):
                     result = checkToken(checkMode,nowCharBuffer)
                     if result != -1:
                         tempResult.append(result)
-            
         lastMode = checkMode
     return tempResult
 
@@ -121,13 +117,15 @@ if __name__=="__main__":
     while line:
         codeStr = codeStr + line
         line = f.readline()
+    
     # 删去预处理指令
     codeStr = re.sub('#.*\\n',"",codeStr)
     # 删去行注释
     codeStr = re.sub('//.*',"",codeStr)
-    # 删去块注释
-    codeStr = re.sub('/\*.*\*/',"",codeStr,flags=re.S|re.M)
+    # 删去块注释 (使用非贪婪匹配)
+    codeStr = re.sub('/\*.*?\*/',"",codeStr,flags=re.S|re.M)
     # print(codeStr)
+    print(codeStr)
     result = scanStr(codeStr)
     for one_result in result:
         print(one_result)

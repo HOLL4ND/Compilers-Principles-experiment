@@ -7,11 +7,11 @@ int main()
     jfiejfiejf
     feifaiejfidjsffjiejijidjfe
     */
-    a2 =10;//efefefe
+    a2 = 10- 2;//efefefe
     /*feifaiejfidjsffjiejijidjfee
     efefe*/
-    float k08;
-    k08 <<= 1;
+    int k08;
+    k08 <<=1;
     a2+=23;
     printf("The value of a is %d",a);
     return 0;
