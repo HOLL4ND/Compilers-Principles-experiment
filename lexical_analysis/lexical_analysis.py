@@ -124,7 +124,6 @@ if __name__=="__main__":
     codeStr = re.sub('//.*',"",codeStr)
     # 删去块注释 (使用非贪婪匹配)
     codeStr = re.sub('/\*.*?\*/',"",codeStr,flags=re.S|re.M)
-    # print(codeStr)
     print(codeStr)
     result = scanStr(codeStr)
     for one_result in result:
