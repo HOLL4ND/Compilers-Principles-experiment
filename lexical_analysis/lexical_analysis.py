@@ -1,4 +1,6 @@
 import re
+import sys
+import argparse
 
 reserveWord ={ "auto":1, "break":2, "case":3, "char":4, "const":5, "continue":6,
     "default":7, "do":8, "double":9, "else":10, "enum":11, "extern":12,
@@ -110,26 +112,49 @@ def scanStr(str):
 
 
 if __name__=="__main__":
-    line = 0
-    codeStr = ""
-    f = open("my_file.txt",'r',encoding = "utf-8")
-    line = f.readline()
-    while line:
-        codeStr = codeStr + line
-        line = f.readline()
-    
-    # 删去预处理指令
-    codeStr = re.sub('#.*\\n',"",codeStr)
-    # 删去行注释
-    codeStr = re.sub('//.*',"",codeStr)
-    # 删去块注释 (使用非贪婪匹配)
-    codeStr = re.sub('/\*.*?\*/',"",codeStr,flags=re.S|re.M)
-    # print(codeStr)
-    print(codeStr)
-    result = scanStr(codeStr)
-    for one_result in result:
-        print(one_result)
 
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f","--file",help="appoint file path")
+    parser.add_argument("-s","--string",help="input string and analysis",action="store_true")
+
+    args = parser.parse_args()
+    if args.file != None and args.string != None:
+        parser.error('-f and -s args CAN NOT use together')
+    print(args)
+    if args.file != None:
+        filepath = args.file
+        line = 0
+        codeStr = ""
+        f = open(filepath,'r',encoding = "utf-8")
+        line = f.readline()
+        while line:
+            codeStr = codeStr + line
+            line = f.readline()
+        
+        # 删去预处理指令
+        codeStr = re.sub('#.*\\n',"",codeStr)
+        # 删去行注释
+        codeStr = re.sub('//.*',"",codeStr)
+        # 删去块注释 (使用非贪婪匹配)
+        codeStr = re.sub('/\*.*?\*/',"",codeStr,flags=re.S|re.M)
+        print(codeStr)
+        result = scanStr(codeStr)
+        for one_result in result:
+            print(one_result)
+    else :
+        codeStr = input("Please input the code:")
+        # print(codeStr)
+        # 删去预处理指令
+        codeStr = re.sub('#.*\\n',"",codeStr)
+        # 删去行注释
+        codeStr = re.sub('//.*',"",codeStr)
+        # 删去块注释 (使用非贪婪匹配)
+        codeStr = re.sub('/\*.*?\*/',"",codeStr,flags=re.S|re.M)
+        print(codeStr)
+        result = scanStr(codeStr)
+        for one_result in result:
+            print(one_result)
 
 # https://www.cnblogs.com/unixfy/p/3242917.html 博客园
 # https://blog.csdn.net/qq_36711003/article/details/82975586
