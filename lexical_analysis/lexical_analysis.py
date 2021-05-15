@@ -146,10 +146,7 @@ def scanStr(str):
                 nowCharBuffer = nowCharBuffer + ch
                 result = checkToken("mark", nowCharBuffer)
                 if result != -1:
-<<<<<<< HEAD
-                    # 弹出上一轮添加的token
-=======
->>>>>>> parent of 23cf4cc (update code and add almost full comments)
+                    # 弹出刚刚添加的token
                     tempResult.pop()
                     tempResult.append(result)
                 else:
