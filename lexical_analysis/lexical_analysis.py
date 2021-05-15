@@ -119,7 +119,7 @@ def scanStr(str):
                 result = checkToken("mark", nowCharBuffer)
                 # 如果加上新的字符后匹配成功
                 if result != -1:
-                    # 弹出刚刚添加的token
+                    # 弹出上一轮添加的token
                     tempResult.pop()
                     # 压入新的匹配结果
                     tempResult.append(result)
