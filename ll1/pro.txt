@@ -1,0 +1,5 @@
+E=TR
+R=+TR|¦Å
+T=FY
+Y=*FY|¦Å
+F=(E)|i
